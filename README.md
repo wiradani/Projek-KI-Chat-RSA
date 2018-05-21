@@ -19,5 +19,5 @@ $ npm start
 
 2. open this link in your browser
 ```
-$ localhost:3000
+$ localhost:8080
 ```
