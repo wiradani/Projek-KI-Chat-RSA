@@ -48,7 +48,7 @@
   
   /** Chat Window **/
   .chat-container {
-    flex: 0 0 60%;
+    flex: 0 0 100%;
     word-wrap: break-word;
     overflow-x: hidden;
     overflow-y: scroll;

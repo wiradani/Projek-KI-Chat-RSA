@@ -23,6 +23,7 @@ const vm = new Vue ({
     // Generate keypair and join default room
     this.originPublicKey = await this.getWebWorkerResponse('generate-keys')
     this.addNotification(`Keypair Generated - ${this.getKeySnippet(this.originPublicKey)}`)
+    console.log(this.originPublicKey)
 
     // Initialize socketio
     this.socket = io()
@@ -54,6 +55,7 @@ const vm = new Vue ({
       this.socket.on('NEW_CONNECTION', () => {
         this.addNotification('Another user joined the room.')
         this.sendPublicKey()
+        alert('ada user masuk')
       })
 
       // Broadcast public key when a new room is joined
@@ -61,12 +63,14 @@ const vm = new Vue ({
         this.currentRoom = newRoom
         this.addNotification(`Joined Room - ${this.currentRoom}`)
         this.sendPublicKey()
+        alert('room terbuat')
       })
 
       // Save public key when received
       this.socket.on('PUBLIC_KEY', (key) => {
         this.addNotification(`Public Key Received - ${this.getKeySnippet(key)}`)
         this.destinationPublicKey = key
+        console.log(this.destinationPublicKey)
       })
 
       // Clear destination public key if other user leaves room
@@ -78,7 +82,7 @@ const vm = new Vue ({
       // Notify user that the room they are attempting to join is full
       this.socket.on('ROOM_FULL', () => {
         this.addNotification(`Cannot join ${this.pendingRoom}, room is full`)
-
+        alert("room penuh")
         // Join a random room as a fallback
         this.pendingRoom = Math.floor(Math.random() * 1000)
         this.joinRoom()
